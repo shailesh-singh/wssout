@@ -51,5 +51,4 @@ Kafka Example
 ![KAFKA APACHE PIPELINE](wssout.png)
 
 ### wssout.py to KAFKA to Elastic using Logstash
-![KAFKA ELASTICSEARCH PIPELINE](wssout_es.png)# wssout
-# wssout
+![KAFKA ELASTICSEARCH PIPELINE](wssout_es.png)
