@@ -8,7 +8,6 @@ import asyncio
 import websockets
 import logging
 from kafka import KafkaProducer
-from IDEX import idexr_lookup
 
 stdout_params = ['wslink', 'wslink_param', 'out']
 kafka_params = stdout_params + ['topic', 'kafka_broker']
@@ -51,7 +50,6 @@ class wss_socket(object):
         except ValueError as exp:
             sys.exit(exp)
 
-        # return config
 
     async def connect(self):
         # Connects to websocket and routes stream to Kafka topic
@@ -86,28 +84,9 @@ def main():
     if len(args) != 1:
         parser.error("wrong number of arguments")
 
-    # print (options)
-    # print (args)
-
-    # if options.config:
-    #     with open(args[0]) as f:
-    #         data = json.load(f)
-
-    # print(args[0])
-
     ws = wss_socket(filename=args[0])
 
 
 if __name__ == "__main__":
-    # ws = wss_socket(filename="configBittrex.json")
-    # ws = wss_socket(filename="configIDEX.json")
-    # ws = wss_socket(filename="eth_stdout.json")
-    # ws = wss_socket(filename="configcb.json")
-    # ws = wss_socket(filename="eth_stdout.json")
-    # print(ws.config)
-
-
-    # print (idexr_lookup())
-    # ws = wss_socket(filename="config.json")
 
     main()
