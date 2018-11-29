@@ -17,7 +17,7 @@ Parameter|Description
 ---|---
 wslink| websocket URL
 wslink_param|connection payload (set to null if none)
-out|sink type
+out|sink type (options: stdout, kafka)
 topic|name of Kafka topic to sink (kafka only)
 kakfa_broker|kafka broker/bootstrap-server url (kafka only)
 
