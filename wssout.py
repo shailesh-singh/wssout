@@ -76,7 +76,7 @@ class wss_socket(object):
 
 
 def main():
-    parser = OptionParser(usage="steamit -f <config file>", version="0.1")
+    parser = OptionParser(usage="wssout -f <config file>", version="0.1")
     parser.add_option("-f", "--config", action="store_true", default=False)
 
     (options, args) = parser.parse_args()
