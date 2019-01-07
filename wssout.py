@@ -9,14 +9,13 @@ import websockets
 import logging
 from kafka import KafkaProducer
 
-stdout_params = ['wslink', 'wslink_param', 'out']
-kafka_params = stdout_params + ['topic', 'kafka_broker']
-
-ERR_MSG_CONFIG = 'Error: Invalid Config File'
-
-
-
+# TODO move wss_socket into it's own module
 class wss_socket(object):
+
+    stdout_params = ['wslink', 'wslink_param', 'out']
+    kafka_params = stdout_params + ['topic', 'kafka_broker']
+
+    ERR_MSG_CONFIG = 'Error: Invalid Config File'
     def __init__(self, **kwargs):
         self.file = kwargs.get('filename')
         self.config = self.config_check()
@@ -26,6 +25,7 @@ class wss_socket(object):
             loop.run_forever()
             loop.close()
 
+    # @TODO make into static method
     def config_check(self):
         with open(self.file) as f:
             config = json.load(f)
@@ -34,14 +34,14 @@ class wss_socket(object):
             if config['out']:
                 # Standard Out
                 if config['out'] == 'stdout':
-                    if all([i in config.keys() for i in stdout_params]):
+                    if all([i in config.keys() for i in wss_socket.stdout_params]):
                         return config
                     else:
                         raise ValueError(ERR_MSG_CONFIG)
 
                 # Kafka Out
                 if config['out'] == 'kafka':
-                    if all([i in config.keys() for i in kafka_params]):
+                    if all([i in config.keys() for i in wss_socket.kafka_params]):
                         return config
                     else:
                         raise ValueError(ERR_MSG_CONFIG)
@@ -53,6 +53,7 @@ class wss_socket(object):
 
     async def connect(self):
         # Connects to websocket and routes stream to Kafka topic
+        # @TODO move logging options into to decorator function
 
         logging.info(self.config["wslink"])
         logging.info(json.dumps(self.config["wslink_param"]))
